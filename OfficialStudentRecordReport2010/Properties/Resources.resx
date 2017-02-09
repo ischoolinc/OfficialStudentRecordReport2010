@@ -122,9 +122,9 @@
     <value>..\resources\學籍表進校.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="學籍表高中" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\學籍表高中.xls;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\學籍表高中.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="學籍表高職" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\學籍表高職.xls;System.Byte[], mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>..\resources\學籍表高職.xls;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
 </root>
