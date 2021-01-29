@@ -32,6 +32,7 @@ namespace OfficialStudentRecordReport2010
         DataPool dataPool;              //  所有學生的資料
         int reportType;              //  學籍表存檔選項：1-->每班一個檔案。2-->每個學生一個檔案。3-->每100個學生一個檔案。
         int textScoreOption;            //  文字評量選項：1-->導師評語。2-->文字評量。3-->2者皆要
+
         IEnumerable<SHStudentRecord> students;
 
         public List<DataSet> TransferFormat(object[] bgwObject)
@@ -1025,6 +1026,9 @@ namespace OfficialStudentRecordReport2010
 
                 DataTable EnrollRecordTable = new DataTable("EnrollUpdateRecord");
                 EnrollRecordTable.Columns.Add("EnrollUpdateRecord");
+
+
+
                 foreach (SHUpdateRecordRecord u in enrollUpdateRecords)
                 {
                     DataRow pRow = EnrollRecordTable.NewRow();
@@ -1038,7 +1042,16 @@ namespace OfficialStudentRecordReport2010
                     EnrollRecordTable.Rows.Add(pRow);
 
                     pRow = EnrollRecordTable.NewRow();
-                    pRow["EnrollUpdateRecord"] = u.ADDate + "\n" + u.ADNumber;
+
+                    string twAddate = u.ADDate;
+                    if (!String.IsNullOrEmpty(twAddate))
+                    {
+                        if (Convert.ToDateTime(twAddate).Year.ToString().Length == 4)
+                            twAddate = (Convert.ToDateTime(twAddate).Year - 1911).ToString() + "/" + Convert.ToDateTime(twAddate).Month.ToString() + "/" + Convert.ToDateTime(twAddate).Day.ToString();
+                    }
+
+                    pRow["EnrollUpdateRecord"] = twAddate + "\n" + u.ADNumber;
+
                     EnrollRecordTable.Rows.Add(pRow);
 
                     break;
@@ -1059,7 +1072,13 @@ namespace OfficialStudentRecordReport2010
                     GraduateRecordTable.Rows.Add(pRow);
 
                     pRow = GraduateRecordTable.NewRow();
-                    pRow["GraduateUpdateRecord"] = u.ADDate + " " + u.ADNumber;
+                    string twAddate = u.ADDate;
+                    if (!String.IsNullOrEmpty(twAddate))
+                    {
+                        if (Convert.ToDateTime(twAddate).Year.ToString().Length == 4)
+                            twAddate = (Convert.ToDateTime(twAddate).Year - 1911).ToString() + "/" + Convert.ToDateTime(twAddate).Month.ToString() + "/" + Convert.ToDateTime(twAddate).Day.ToString();
+                    }
+                    pRow["GraduateUpdateRecord"] = twAddate + " " + u.ADNumber;
                     GraduateRecordTable.Rows.Add(pRow);
 
                     break;
@@ -1084,10 +1103,22 @@ namespace OfficialStudentRecordReport2010
                     //    continue;
 
                     DataRow pRow = OtherUpdateRecordTable.NewRow();
-
-                    pRow["其它異動日期"] = u.UpdateDate;
+                    string twAddate = u.ADDate;
+                    if (!String.IsNullOrEmpty(twAddate))
+                    {
+                        if (Convert.ToDateTime(twAddate).Year.ToString().Length == 4)
+                            twAddate = (Convert.ToDateTime(twAddate).Year - 1911).ToString() + "/" + Convert.ToDateTime(twAddate).Month.ToString() + "/" + Convert.ToDateTime(twAddate).Day.ToString();
+                    }
+                    string twUpdate = u.UpdateDate;
+                    if (!String.IsNullOrEmpty(twUpdate))
+                    {
+                        if (Convert.ToDateTime(twUpdate).Year.ToString().Length == 4)
+                            twUpdate = (Convert.ToDateTime(twUpdate).Year - 1911).ToString() + "/" + Convert.ToDateTime(twUpdate).Month.ToString() + "/" + Convert.ToDateTime(twUpdate).Day.ToString();
+                    }
+                  
+                    pRow["其它異動日期"] = twUpdate;
                     pRow["其它異動事項"] = u.UpdateCode + " " + u.UpdateDescription;
-                    pRow["其它異動文號"] = u.ADDate + " " + u.ADNumber;
+                    pRow["其它異動文號"] = twAddate+ " " + u.ADNumber;
 
                     OtherUpdateRecordTable.Rows.Add(pRow);
                 }
